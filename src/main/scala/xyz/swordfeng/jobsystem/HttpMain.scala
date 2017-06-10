@@ -38,9 +38,50 @@ object HttpMain extends StreamApp with LazyLogging {
             }
         }
 
-        case GET -> Root / "api" / "getFirst" =>
+        case req @ POST -> Root / "api" / "pass" =>
+            if (JobChecker.checkingJobPassed(true)) {
+                Ok(json"""{"status": true}""")
+            } else {
+                Ok(json"""{"status": false, "error": "no checking job"}""")
+            }
+
+        case req @ POST -> Root / "api" / "reject" =>
+            if (JobChecker.checkingJobPassed(false)) {
+                Ok(json"""{"status": true}""")
+            } else {
+                Ok(json"""{"status": false, "error": "no checking job"}""")
+            }
+
+        case req @ GET -> Root / "api" / "getFirst" =>
             val job = JobChecker.getCheckingJob
-            Ok("")
+            if (job != null) {
+                Ok(json"""{
+                  "status": true,
+                  "name": ${job.getName},
+                  "address": ${job.getAddress},
+                  "education": ${job.getEducation},
+                  "num": ${job.getRequiredNumOfPeople},
+                  "skills": ${job.getSkills}
+                  }""")
+            } else {
+                Ok(json"""{"status":false,"error":"no checking jobs"}""")
+            }
+
+        case req @ POST -> Root / "api" / "submitJob" => req.decode[UrlForm] { f =>
+            try {
+                val job = new Job(???,
+                    (f get "name").head,
+                    (f get "address").head,
+                    (f get "num").head.toInt,
+                    (f get "skills").toArray,
+                    (f get "education").head
+                )
+                job.save()
+                Ok(json"""{"status": true}""")
+            } catch {
+                case _: Throwable => Ok(json"""{"status": false, "error": "wtf"}""")
+            }
+        }
     }
 
     override def stream(args: List[String]): fs2.Stream[Task, Nothing] =
