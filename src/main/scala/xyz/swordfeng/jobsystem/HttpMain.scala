@@ -2,7 +2,7 @@ package xyz.swordfeng.jobsystem
 
 import com.typesafe.scalalogging.LazyLogging
 import fs2.Task
-import org.http4s.{HttpService, UrlForm}
+import org.http4s.{HttpService, StaticFile, UrlForm}
 import org.http4s.dsl._
 import org.http4s.server.blaze._
 import io.circe.literal._
@@ -27,14 +27,17 @@ object HttpMain extends StreamApp with LazyLogging {
         case req @ POST -> Root / "api" / "register" => req.decode[UrlForm] { f =>
             val username = (f get "username").head
             val password = (f get "password").head
+            val money = (f get "money").head.toInt
             if (username == null || password == null) {
                 Ok(json"""{"status":false,"error":"invalid request"}""")
             } else try {
-                val user = User.register(username, password, 0)
+                val user = User.register(username, password, money)
                 Ok(json"""{"status":true}""")
             } catch {
                 case _: User.UserExist =>
                     Ok(json"""{"status":false,"error":"user exists"}""")
+                case _: User.MoneyBelowZero =>
+                    Ok(json"""{"status":false,"error":"no money no register"}""")
             }
         }
 
@@ -69,7 +72,9 @@ object HttpMain extends StreamApp with LazyLogging {
 
         case req @ POST -> Root / "api" / "submitJob" => req.decode[UrlForm] { f =>
             try {
-                val job = new Job(???,
+                val user = User.get((f get "username").head)
+                val job = new Job(
+                    user,
                     (f get "name").head,
                     (f get "address").head,
                     (f get "num").head.toInt,
@@ -82,6 +87,9 @@ object HttpMain extends StreamApp with LazyLogging {
                 case _: Throwable => Ok(json"""{"status": false, "error": "wtf"}""")
             }
         }
+
+        case req @ GET -> Root / path if !path.startsWith("api/") =>
+            StaticFile.fromResource("/ui/" + path, Some(req)).map(Task.now).getOrElse(NotFound())
     }
 
     override def stream(args: List[String]): fs2.Stream[Task, Nothing] =

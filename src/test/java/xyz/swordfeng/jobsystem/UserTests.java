@@ -28,7 +28,11 @@ public class UserTests {
     public void negativeMoney() throws User.UserExist, User.MoneyBelowZero {
         User.register("user2", "password2", -1);
     }
-
+    @Test
+    public void get() {
+        assertTrue("get user", User.get("user1") != null);
+        assertTrue("get non-exist user", User.get("user111") == null);
+    }
     @Test
     public void login() throws User.AuthFailure {
         User user = User.login("user1", "password");

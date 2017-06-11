@@ -24,6 +24,9 @@ public final class User implements Serializable {
             super("Input money is lower than zero");
         }
     }
+    public static User get(@NotNull String username) {
+        return DB.getInstance().get(username, User.class);
+    }
     public static @NotNull User login(@NotNull String username, @NotNull String password) throws AuthFailure {
         User user = DB.getInstance().get(username, User.class);
         if (user == null || !password.equals(user.password)) {
