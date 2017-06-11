@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src='node_modules/jquery/dist/jquery.min.js'></script>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<script src='node_modules//bootstrap/dist/js/bootstrap.min.js'></script>
+<link rel='node_modules/bootstrap//dist/fonts/glyphicons-halflings-regular.svg'>
+<link rel="stylesheet" href="css/default.css">
+<link rel="stylesheet" href="css/login.css">
+<script src='js/login.js'></script>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <div class="container">
+    	<div class="page-header" style='display:none'>
+    		<h1>
+    			<div style='color: #99FFCC'>全世界第二好的找工作系统</div>
+    		</h1>
+    	</div>
+    	<div class='row' style="height:100px"></div>
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <form class="form-horizontal" action='http://cjc96.com/' method="post">
+                    <span class="heading">用户登录</span>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="inputEmail" placeholder="用户名或电子邮件" name='username'>
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="form-group help">
+                        <input type="password" class="form-control" id="inputPassword" placeholder="密　码" name='password'>
+                        <i class="fa fa-lock"></i>
+                        <a href="#" class="fa fa-question-circle"></a>
+                    </div>
+                    <div class="form-group">
+                        <div class="main-checkbox">
+                            <input type="checkbox" value="None" id="checkbox1" name="check"/>
+                            <label for="checkbox1"></label>
+                        </div>
+                        <span class="text">Remember me</span>
+                        <button type="button" class="btn btn-default" onclick="myLogin()">登录</button>
+                        <button type="button" class="btn btn-success" onclick="myRegist()">注册</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
