@@ -88,8 +88,9 @@ object HttpMain extends StreamApp with LazyLogging {
             }
         }
 
-        case req @ GET -> Root / path if !path.startsWith("api/") =>
-            StaticFile.fromResource("/ui/" + path, Some(req)).map(Task.now).getOrElse(NotFound())
+        case req @ GET -> _  if !req.pathInfo.startsWith("/api/") =>
+            val path = req.pathInfo
+            StaticFile.fromResource("/ui" + path, Some(req)).map(Task.now).getOrElse(NotFound())
     }
 
     override def stream(args: List[String]): fs2.Stream[Task, Nothing] =
