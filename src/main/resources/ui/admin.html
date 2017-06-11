@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src='node_modules/jquery/dist/jquery.min.js'></script>
+<script src='js/admin.js'></script>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<script src='node_modules//bootstrap/dist/js/bootstrap.min.js'></script>
+<link rel='node_modules/bootstrap//dist/fonts/glyphicons-halflings-regular.svg'>
+<link rel="stylesheet" href="css/default.css">
+<link rel="stylesheet" href="css/admin.css">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="container" style='display: none' id='myMain'>
+		<div class="row">
+			<div class='row' style="height:70px"></div>
+            <div class="col-md-offset-1 col-md-10">
+                <form class="form-horizontal" action='http://cjc96.com/' method="post">
+                    <span class="heading">Hi，政委！</span>
+                    <h3>当前审核内容</h3>
+                    <ul>
+                    	<li>名称：<p id="name"></p></li>
+                    	<li>地址：<p id="address"></p></li>
+                    	<li>人数：<p id="num"></p></li>
+                    	<li>技能要求：<p id="skills"></p></li>
+                    	<li>学历要求：<p id="education"></p></li>
+                    </ul>
+                    <div class='button-group'>
+                    	<button class='btn btn-success' type="button" onclick="pass">通过</button>
+                    	<button class='btn btn-danger' type='button' onclick="unpass">不通过</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+	</div>
+</body>

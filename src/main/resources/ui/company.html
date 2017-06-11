@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src='node_modules/jquery/dist/jquery.min.js'></script>
+<script src='js/company.js'></script>	
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<script src='node_modules//bootstrap/dist/js/bootstrap.min.js'></script>
+<link rel='node_modules/bootstrap//dist/fonts/glyphicons-halflings-regular.svg'>
+<link rel="stylesheet" href="css/default.css">
+<link rel="stylesheet" href="css/company.css">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="container" id='myMain' style="display: none">
+		<div class="row">
+			<div class='row' style="height:70px"></div>
+            <div class="col-md-offset-1 col-md-10">
+                <form class="form-horizontal" action='http://cjc96.com/' method="post">
+                    <span class="heading">Hi，老板！</span>
+                    <h3>发布工作需求</h3>
+                	<div>
+                		<label style="width:100px; text-align: right;">名称：</label>
+                		<input type="text" id='name'>
+                	</div>
+                	<div>
+                		<label style="width:100px; text-align: right;">地址：</label>
+                		<input type="text" id='address'>
+                	</div>
+                	<div>
+                		<label style="width:100px; text-align: right;">人数：</label>
+                		<input type="text" id='num'>
+                	</div>
+                	<div>
+                		<label style="width:100px; text-align: right;">技能要求：</label>
+                		<input type="text" id='skills'>
+                	</div>
+                	<div>
+                		<label style="width:100px; text-align: right;">学历要求：</label>
+                		<input type="text" id='education'>
+                	</div>
+                    <div class='button-group'>
+                    	<button type='button' class='btn btn-success' onclick="mySubmit()">送审</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+	</div>
+</body>
