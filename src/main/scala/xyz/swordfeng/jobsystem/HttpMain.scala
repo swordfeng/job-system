@@ -84,7 +84,7 @@ object HttpMain extends StreamApp with LazyLogging {
                 job.save()
                 Ok(json"""{"status": true}""")
             } catch {
-                case _: Throwable => Ok(json"""{"status": false, "error": "wtf"}""")
+                case e: Throwable => Ok(json"""{"status": false, "error": ${e.getMessage}}""")
             }
         }
 

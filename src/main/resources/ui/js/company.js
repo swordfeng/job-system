@@ -8,7 +8,7 @@ function mySubmit() {
 		name: $('#name').val(),
 		address: $('#address').val(),
 		num: $('#num').val(),
-		skills: $('#skills').val().split(','),
+		skills: $('#skills').val().split(',').toString(),
 		education: $('#education').val()
 	}
 	console.log(myForm)
