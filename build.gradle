@@ -42,7 +42,7 @@ dependencies {
     testCompile 'org.scalatest:scalatest_2.12:3.0.0'
 }
 
-task server(type:JaveExec) {
+task server(type:JavaExec) {
     main = 'xyz.swordfeng.jobsystem.HttpMain'
     classpath = sourceSets.main.runtimeClasspath
 }
